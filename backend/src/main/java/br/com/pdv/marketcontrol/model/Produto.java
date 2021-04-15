@@ -29,6 +29,14 @@ public class Produto {
             inverseJoinColumns = @JoinColumn(name = "id_venda"))
     private Set<Venda> vendas;
 
+    public Set<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Set<Venda> vendas) {
+        this.vendas = vendas;
+    }
+
     public String getCodBarras() {
         return codBarras;
     }

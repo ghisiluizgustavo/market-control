@@ -1,5 +1,7 @@
 package br.com.pdv.marketcontrol.model;
 
+import br.com.pdv.marketcontrol.model.enums.TipoPagamento;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,9 +15,18 @@ public class Venda {
     private Long id;
     private Float valor;
     @Column(name = "tipo_pagamento")
-    private String tipoPagamento;
+    private TipoPagamento tipoPagamento;
     @Column(name = "data_venda")
     private LocalDate dataVenda;
+
+    public Set<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(Set<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
     @ManyToMany
     private Set<Produto> produtos;
 
@@ -27,11 +38,11 @@ public class Venda {
         this.valor = valor;
     }
 
-    public String getTipoPagamento() {
+    public TipoPagamento getTipoPagamento() {
         return tipoPagamento;
     }
 
-    public void setTipoPagamento(String tipoPagamento) {
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
         this.tipoPagamento = tipoPagamento;
     }
 
