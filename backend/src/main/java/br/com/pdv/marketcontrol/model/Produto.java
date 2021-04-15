@@ -2,12 +2,10 @@ package br.com.pdv.marketcontrol.model;
 
 import com.sun.istack.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Produto {
@@ -15,17 +13,43 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
-    private Integer id;
+    private Long id;
     @NotNull
     private String nome;
     private Float valor;
+    @Column(name = "data_vencimento")
     private LocalDate vencimento;
+    @Column(name = "cod_barras")
+    private String codBarras;
+    private Integer quantidade;
+    @ManyToMany
+    @JoinTable(
+            name = "venda_produto",
+            joinColumns = @JoinColumn(name = "id_prod"),
+            inverseJoinColumns = @JoinColumn(name = "id_venda"))
+    private Set<Venda> vendas;
 
-    public Integer getId() {
+    public String getCodBarras() {
+        return codBarras;
+    }
+
+    public void setCodBarras(String codBarras) {
+        this.codBarras = codBarras;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,6 +75,18 @@ public class Produto {
 
     public void setVencimento(LocalDate vencimento) {
         this.vencimento = vencimento;
+    }
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", valor=" + valor +
+                ", vencimento=" + vencimento +
+                ", codBarras='" + codBarras + '\'' +
+                ", quantidade=" + quantidade +
+                '}';
     }
 
     @Override
