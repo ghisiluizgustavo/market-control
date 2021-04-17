@@ -47,13 +47,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
-        <!-- PostgreSQL -->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <!-- MySQL -->
         <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901-1.jdbc4</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
         </dependency>
+
 
     </dependencies>
 
