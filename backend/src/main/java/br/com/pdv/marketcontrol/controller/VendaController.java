@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoController {
+@RequestMapping("/vendas")
+public class VendaController {
 
     @Autowired
-    ProdutoRepository produtoRepository;
+    VendaRepository vendaRepository;
 
     @GetMapping()
-    public ResponseEntity<List<Produto>> listAllProdutos(){
+    public ResponseEntity<List<Venda>> listAllProdutos(){
 
-        List<Produto> listaProd = this.produtoRepository.findAll();
+        List<Venda> listaVenda = this.vendaRepository.findAll();
 
-        return ResponseEntity.ok(listaProd);
+        return ResponseEntity.ok(listaVenda);
     }
 }
