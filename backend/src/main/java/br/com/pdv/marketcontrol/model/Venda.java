@@ -1,6 +1,8 @@
 package br.com.pdv.marketcontrol.model;
 
 import br.com.pdv.marketcontrol.model.enums.TipoPagamento;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -15,20 +17,26 @@ public class Venda {
     private Long id;
     private Float valor;
     @Column(name = "tipo_pagamento")
+    @Enumerated(EnumType.STRING)
     private TipoPagamento tipoPagamento;
     @Column(name = "data_venda")
     private LocalDate dataVenda;
 
+    @Fetch(FetchMode.SELECT)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "venda_produto",
+            joinColumns = @JoinColumn(name = "venda_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id"))
+    private Set<Produto> produto;
+
     public Set<Produto> getProdutos() {
-        return produtos;
+        return produto;
     }
 
     public void setProdutos(Set<Produto> produtos) {
-        this.produtos = produtos;
+        this.produto = produtos;
     }
-
-    @ManyToMany
-    private Set<Produto> produtos;
 
     public Float getValor() {
         return valor;

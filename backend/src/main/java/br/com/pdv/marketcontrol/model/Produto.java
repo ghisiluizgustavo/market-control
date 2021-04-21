@@ -22,20 +22,17 @@ public class Produto {
     @Column(name = "cod_barras")
     private String codBarras;
     private Integer quantidade;
-    @ManyToMany
-    @JoinTable(
-            name = "venda_produto",
-            joinColumns = @JoinColumn(name = "id_prod"),
-            inverseJoinColumns = @JoinColumn(name = "id_venda"))
-    private Set<Venda> vendas;
 
-    public Set<Venda> getVendas() {
-        return vendas;
-    }
-
-    public void setVendas(Set<Venda> vendas) {
-        this.vendas = vendas;
-    }
+//    @ManyToMany(mappedBy = "produto", fetch = FetchType.EAGER)
+//    private Set<Venda> vendas;
+//
+//    public Set<Venda> getVendas() {
+//        return vendas;
+//    }
+//
+//    public void setVendas(Set<Venda> vendas) {
+//        this.vendas = vendas;
+//    }
 
     public String getCodBarras() {
         return codBarras;
