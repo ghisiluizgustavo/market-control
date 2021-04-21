@@ -5,7 +5,8 @@ public enum TipoPagamento {
     DINHEIRO ("Dinheiro"),
     FIADO ("Fiado");
 
+    private String desc;
     TipoPagamento(String desc) {
-
+        this.desc = desc;
     }
 }
