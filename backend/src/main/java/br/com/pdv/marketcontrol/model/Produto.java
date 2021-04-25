@@ -1,9 +1,11 @@
 package br.com.pdv.marketcontrol.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,16 +25,17 @@ public class Produto {
     private String codBarras;
     private Integer quantidade;
 
-//    @ManyToMany(mappedBy = "produto", fetch = FetchType.EAGER)
-//    private Set<Venda> vendas;
-//
-//    public Set<Venda> getVendas() {
-//        return vendas;
-//    }
-//
-//    public void setVendas(Set<Venda> vendas) {
-//        this.vendas = vendas;
-//    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "produtos")
+    private List<Venda> vendas;
+
+    public List<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<Venda> vendas) {
+        this.vendas = vendas;
+    }
 
     public String getCodBarras() {
         return codBarras;

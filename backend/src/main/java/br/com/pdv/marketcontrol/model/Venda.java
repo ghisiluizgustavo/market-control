@@ -6,6 +6,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,20 +23,19 @@ public class Venda {
     @Column(name = "data_venda")
     private LocalDate dataVenda;
 
-    @Fetch(FetchMode.SELECT)
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "venda_produto",
             joinColumns = @JoinColumn(name = "venda_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id"))
-    private Set<Produto> produto;
+    private List<Produto> produtos;
 
-    public Set<Produto> getProdutos() {
-        return produto;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setProdutos(Set<Produto> produtos) {
-        this.produto = produtos;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     public Float getValor() {
