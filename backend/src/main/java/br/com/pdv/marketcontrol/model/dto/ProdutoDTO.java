@@ -1,14 +1,31 @@
 package br.com.pdv.marketcontrol.model.dto;
 
+import br.com.pdv.marketcontrol.model.Produto;
+import org.springframework.data.domain.Page;
+
 import java.time.LocalDate;
 
 public class ProdutoDTO {
 
+    private Long id;
     private String nome;
     private Float valor;
     private LocalDate vencimento;
     private String codBarras;
     private Integer quantidade;
+
+    public ProdutoDTO(Produto produto){
+        this.id = produto.getId();
+        this.nome = produto.getNome();
+        this.valor = produto.getValor();
+        this.vencimento = produto.getVencimento();
+        this.codBarras = produto.getCodBarras();
+        this.quantidade = produto.getQuantidade();
+    }
+
+    public static Page<ProdutoDTO> converter(Page<Produto> produtos){
+        return produtos.map(ProdutoDTO::new);
+    }
 
     public String getNome() {
         return nome;
