@@ -18,7 +18,6 @@ public class ProdutoService{
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<Produto> produtos = produtoRepository.findAll(pageable);
-
         return ProdutoDTO.converter(produtos);
     }
 }

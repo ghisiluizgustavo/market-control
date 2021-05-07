@@ -3,7 +3,12 @@ package br.com.pdv.marketcontrol.controller;
 import br.com.pdv.marketcontrol.model.Produto;
 import br.com.pdv.marketcontrol.model.dto.ProdutoDTO;
 import br.com.pdv.marketcontrol.repository.ProdutoRepository;
+import br.com.pdv.marketcontrol.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +25,13 @@ public class ProdutoController {
 
     @Autowired
     ProdutoRepository produtoRepository;
+    ProdutoService produtoService;
 
     @GetMapping()
-    public ResponseEntity<List<Produto>> listarProdutos(){
+    public ResponseEntity<Page<ProdutoDTO>> listarProdutos(
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
 
-        List<Produto> listaProd = this.produtoRepository.findAll();
+        Page<ProdutoDTO> listaProd = produtoService.findAll(pageable);
 
         return ResponseEntity.ok(listaProd);
     }
@@ -41,9 +48,14 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity<Produto> salvarProduto(@RequestBody Produto produto, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<Produto> salvarProduto(
+            @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
+
         Produto produtoResultado = this.produtoRepository.save(produto);
-        URI uri = uriBuilder.path("/produtos/{id}").buildAndExpand(produtoResultado.getId()).toUri();
+        URI uri = uriBuilder
+                .path("/produtos/{id}")
+                .buildAndExpand(produtoResultado.getId())
+                .toUri();
 
         return ResponseEntity.created(uri).body(produtoResultado);
     }
