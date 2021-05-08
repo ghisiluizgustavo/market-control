@@ -4,6 +4,7 @@ import br.com.pdv.marketcontrol.model.Produto;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class ProdutoDTO {
 
@@ -25,6 +26,10 @@ public class ProdutoDTO {
 
     public static Page<ProdutoDTO> converter(Page<Produto> produtos){
         return produtos.map(ProdutoDTO::new);
+    }
+
+    public static ProdutoDTO converter(Produto produto){
+        return new ProdutoDTO(produto);
     }
 
     public String getNome() {

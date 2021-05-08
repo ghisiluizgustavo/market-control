@@ -25,6 +25,7 @@ public class ProdutoController {
 
     @Autowired
     ProdutoRepository produtoRepository;
+    @Autowired
     ProdutoService produtoService;
 
     @GetMapping()
@@ -37,14 +38,10 @@ public class ProdutoController {
     }
 
     @GetMapping("/{codBarras}")
-    public ResponseEntity<Produto> buscarProduto(@PathVariable String codBarras){
-        Optional<Produto> response = produtoRepository.findByCodBarras(codBarras);
-        //TODO -> Fazer uma função lambda(funcional)
-        if(response.isPresent()){
-            return ResponseEntity.ok().body(response.get());
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+    public ResponseEntity<ProdutoDTO> buscarProduto(@PathVariable String codBarras){
+          return produtoService.findOneProduct(codBarras)
+                  .map(produto -> ResponseEntity.ok().body(ProdutoDTO.converter(produto)))
+                  .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping()

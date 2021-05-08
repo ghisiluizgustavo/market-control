@@ -8,7 +8,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class ProdutoService{
 
     @Autowired
@@ -19,5 +24,9 @@ public class ProdutoService{
 
         Page<Produto> produtos = produtoRepository.findAll(pageable);
         return ProdutoDTO.converter(produtos);
+    }
+
+    public Optional<Produto> findOneProduct(String codBarras){
+        return produtoRepository.findByCodBarras(codBarras);
     }
 }
