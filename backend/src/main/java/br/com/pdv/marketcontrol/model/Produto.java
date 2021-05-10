@@ -29,6 +29,17 @@ public class Produto {
     @ManyToMany(mappedBy = "produtos")
     private List<Venda> vendas;
 
+    public Produto(){
+    }
+
+    public Produto(Produto produto){
+        this.codBarras = produto.getCodBarras();
+        this.nome = produto.getNome();
+        this.quantidade = produto.getQuantidade();
+        this.valor = produto.getValor();
+        this.vencimento = produto.getVencimento();
+    }
+
     public List<Venda> getVendas() {
         return vendas;
     }
