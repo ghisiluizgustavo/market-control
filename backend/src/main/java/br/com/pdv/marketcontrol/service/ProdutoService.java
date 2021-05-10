@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,13 @@ public class ProdutoService{
 
     public Optional<Produto> findOneProduct(String codBarras){
         return produtoRepository.findByCodBarras(codBarras);
+    }
+
+    public Optional<Produto> update(Long id){
+        return produtoRepository.findById(id);
+    }
+
+    public Produto save(Produto produto) {
+        return produtoRepository.save(produto);
     }
 }
