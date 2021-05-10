@@ -45,15 +45,24 @@ public class ProdutoController {
     }
 
     @PostMapping()
-    public ResponseEntity<Produto> salvarProduto(
+    public ResponseEntity<ProdutoDTO> salvarProduto(
             @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
 
-        Produto produtoResultado = this.produtoRepository.save(produto);
+        Produto prodResponse = this.produtoService.save(produto);
         URI uri = uriBuilder
                 .path("/produtos/{id}")
-                .buildAndExpand(produtoResultado.getId())
+                .buildAndExpand(prodResponse.getId())
                 .toUri();
 
-        return ResponseEntity.created(uri).body(produtoResultado);
+        return ResponseEntity.created(uri).body(new ProdutoDTO(prodResponse));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoDTO> atualizarProduto(
+            @PathVariable Long id, @RequestBody Produto produto){
+        return produtoService.update(id)
+                .map(prodResponse -> ResponseEntity.accepted().body(
+                        new ProdutoDTO(this.produtoService.save(produto))))
+                .orElse(ResponseEntity.badRequest().build());
     }
 }
