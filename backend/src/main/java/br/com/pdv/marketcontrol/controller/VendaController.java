@@ -21,9 +21,7 @@ public class VendaController {
 
     @GetMapping()
     public ResponseEntity<List<Venda>> listAllProdutos(){
-
         List<Venda> listaVenda = this.vendaRepository.findAll();
-
         return ResponseEntity.ok(listaVenda);
     }
 }
