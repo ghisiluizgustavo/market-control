@@ -24,13 +24,13 @@ public class ProdutoController {
     @GetMapping()
     public ResponseEntity<Page<ProdutoDTO>> listarProdutos(
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        Page<ProdutoDTO> listaProd = produtoService.findAll(pageable);
+        Page<ProdutoDTO> listaProd = produtoService.buscarTodosProdutos(pageable);
         return ResponseEntity.ok(listaProd);
     }
 
     @GetMapping("/{codBarras}")
     public ResponseEntity<ProdutoDTO> buscarProduto(@PathVariable String codBarras){
-          return produtoService.findOneProduct(codBarras)
+          return produtoService.buscarProduto(codBarras)
                   .map(produto -> ResponseEntity.ok().body(ProdutoDTO.converter(produto)))
                   .orElse(ResponseEntity.notFound().build());
     }
@@ -38,7 +38,7 @@ public class ProdutoController {
     @PostMapping()
     public ResponseEntity<ProdutoDTO> salvarProduto(
             @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
-        Produto prodResponse = this.produtoService.save(produto);
+        Produto prodResponse = this.produtoService.salvar(produto);
         URI uri = uriBuilder
                 .path("/produtos/{id}")
                 .buildAndExpand(prodResponse.getId())
@@ -49,9 +49,9 @@ public class ProdutoController {
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoDTO> atualizarProduto(
             @PathVariable Long id, @RequestBody Produto produto){
-        return produtoService.update(id)
+        return produtoService.atualizar(id)
                 .map(prodResponse -> ResponseEntity.accepted().body(
-                        new ProdutoDTO(this.produtoService.save(produto))))
+                        new ProdutoDTO(this.produtoService.salvar(produto))))
                 .orElse(ResponseEntity.badRequest().build());
     }
 }

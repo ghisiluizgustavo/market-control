@@ -1,5 +1,6 @@
 package br.com.pdv.marketcontrol.service;
 
+import br.com.pdv.marketcontrol.model.Produto;
 import br.com.pdv.marketcontrol.model.Venda;
 import br.com.pdv.marketcontrol.model.dto.VendaDTO;
 import br.com.pdv.marketcontrol.repository.VendaRepository;
@@ -10,15 +11,29 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class VendaService {
 
     @Autowired
     VendaRepository vendaRepository;
 
-    public Page<VendaDTO> findAll(@PageableDefault(
+    public Page<VendaDTO> buscarTodasVendas(@PageableDefault(
             sort = "id", direction = Sort.Direction.ASC)Pageable pageable){
         Page<Venda> vendas = vendaRepository.findAll(pageable);
         return VendaDTO.converter(vendas);
+    }
+
+    public Optional<Venda> buscarVenda(Long id){
+        return vendaRepository.findById(id);
+    }
+
+    public Optional<Venda> atualizar(Long id){
+        return vendaRepository.findById(id);
+    }
+
+    public Venda salvar(Venda venda) {
+        return vendaRepository.save(venda);
     }
 }

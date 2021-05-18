@@ -20,22 +20,22 @@ public class ProdutoService{
     @Autowired
     ProdutoRepository produtoRepository;
 
-    public Page<ProdutoDTO> findAll(
+    public Page<ProdutoDTO> buscarTodosProdutos(
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
 
         Page<Produto> produtos = produtoRepository.findAll(pageable);
         return ProdutoDTO.converter(produtos);
     }
 
-    public Optional<Produto> findOneProduct(String codBarras){
+    public Optional<Produto> buscarProduto(String codBarras){
         return produtoRepository.findByCodBarras(codBarras);
     }
 
-    public Optional<Produto> update(Long id){
+    public Optional<Produto> atualizar(Long id){
         return produtoRepository.findById(id);
     }
 
-    public Produto save(Produto produto) {
+    public Produto salvar(Produto produto) {
         return produtoRepository.save(produto);
     }
 }
