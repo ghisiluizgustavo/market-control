@@ -15,10 +15,10 @@ CREATE TABLE `venda` (
 );
 
 CREATE TABLE `venda_produto` (
-  `id_venda` int,
-  `id_prod` int
+  `venda_id` int,
+  `produto_id` int
 );
 
-ALTER TABLE `venda_produto` ADD FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`);
+ALTER TABLE `venda_produto` ADD FOREIGN KEY (`venda_id`) REFERENCES `venda` (`id`);
 
-ALTER TABLE `venda_produto` ADD FOREIGN KEY (`id_prod`) REFERENCES `produto` (`id`);
+ALTER TABLE `venda_produto` ADD FOREIGN KEY (`produto_id`) REFERENCES `produto` (`id`);
