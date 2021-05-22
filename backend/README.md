@@ -25,7 +25,7 @@
 
 Uma API com funções CRUD, no ramo de mercado / mercearia / pequena loja.
 
-<img src="/home/luiz/Imagens/api.png">
+<img src="image-api.png">
 
 
 ###🖥️ Tecnologias e ferramentas utilizadas
