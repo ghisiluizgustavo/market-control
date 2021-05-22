@@ -21,14 +21,14 @@
 
 <hr>
 
-##📋 Sobre
+## 📋 Sobre
 
 Uma API com funções CRUD, no ramo de mercado / mercearia / pequena loja.
 
 <img src="image-api.png">
 
 
-###🖥️ Tecnologias e ferramentas utilizadas
+### 🖥️ Tecnologias e ferramentas utilizadas
 
 * [Java 11](https://www.oracle.com/br/java/technologies/javase-jdk11-downloads.html)
 * [Maven](https://maven.apache.org/)
@@ -38,7 +38,7 @@ Uma API com funções CRUD, no ramo de mercado / mercearia / pequena loja.
 * [Postman](https://www.postman.com/)
 
 
-##🐾 Getting Started
+## 🐾 Getting Started
 
 Para rodar a aplicação localmente você precisa seguir os seguintes passos... 
 
