@@ -3,6 +3,8 @@ package br.com.pdv.marketcontrol.controller;
 import br.com.pdv.marketcontrol.model.Produto;
 import br.com.pdv.marketcontrol.model.dto.ProdutoDTO;
 import br.com.pdv.marketcontrol.service.ProdutoService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +18,15 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/produtos")
+@Api("API Rest de produtos [CRUD]")
+@CrossOrigin(origins = "*")
 public class ProdutoController {
 
     @Autowired
     ProdutoService produtoService;
 
     @GetMapping()
+    @ApiOperation("Retorna todos produtos")
     public ResponseEntity<Page<ProdutoDTO>> listarProdutos(
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         Page<ProdutoDTO> listaProd = produtoService.buscarTodosProdutos(pageable);
