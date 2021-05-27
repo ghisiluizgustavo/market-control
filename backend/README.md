@@ -52,7 +52,10 @@ Para rodar a aplicação localmente você precisa seguir os seguintes passos...
    ```sh
    mvn clean install
    ```
-3. Abra o projeto na IDE de sua preferência
+3. No diretório do projeto execute
+   ```sh
+   mvn spring-boot:run
+   ```
 
 <hr>
 
