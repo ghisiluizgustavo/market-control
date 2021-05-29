@@ -24,7 +24,28 @@ public class VendaDTO {
         this.produtos = venda.getProdutos();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public Float getValor() {
+        return valor;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+
+    public LocalDate getDataVenda() {
+        return dataVenda;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
     public static Page<VendaDTO> converter(Page<Venda> vendas) {
         return vendas.map(VendaDTO::new);
     }
+
 }
