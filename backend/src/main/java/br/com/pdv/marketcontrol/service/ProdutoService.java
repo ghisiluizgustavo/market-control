@@ -31,11 +31,16 @@ public class ProdutoService{
         return produtoRepository.findByCodBarras(codBarras);
     }
 
-    public Optional<Produto> atualizar(Long id){
+    public Optional<Produto> buscarId(Long id){
         return produtoRepository.findById(id);
     }
 
     public Produto salvar(Produto produto) {
         return produtoRepository.save(produto);
+    }
+
+    public ResponseEntity deletar(Long id){
+        produtoRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }

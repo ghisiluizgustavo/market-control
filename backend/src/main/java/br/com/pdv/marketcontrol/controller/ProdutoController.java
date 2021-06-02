@@ -34,6 +34,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{codBarras}")
+    @ApiOperation("Busca um produto pelo código de barras")
     public ResponseEntity<ProdutoDTO> buscarProduto(@PathVariable String codBarras){
           return produtoService.buscarProduto(codBarras)
                   .map(produto -> ResponseEntity.ok().body(ProdutoDTO.converter(produto)))
@@ -41,6 +42,7 @@ public class ProdutoController {
     }
 
     @PostMapping()
+    @ApiOperation("Cadastra um novo produto")
     public ResponseEntity<ProdutoDTO> salvarProduto(
             @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
         Produto prodResponse = this.produtoService.salvar(produto);
@@ -52,11 +54,20 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation("Atualiza um produto pelo id")
     public ResponseEntity<ProdutoDTO> atualizarProduto(
             @PathVariable Long id, @RequestBody Produto produto){
-        return produtoService.atualizar(id)
+        return produtoService.buscarId(id)
                 .map(prodResponse -> ResponseEntity.accepted().body(
                         new ProdutoDTO(this.produtoService.salvar(produto))))
                 .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("Deleta um produto pelo id")
+    public ResponseEntity deletarProduto(@PathVariable Long id){
+         return produtoService.buscarId(id)
+                 .map( produto -> produtoService.deletar(id))
+                 .orElse(ResponseEntity.notFound().build());
     }
 }
