@@ -7,6 +7,7 @@ import br.com.pdv.marketcontrol.model.dto.VendaDTO;
 import br.com.pdv.marketcontrol.repository.ProdutoRepository;
 import br.com.pdv.marketcontrol.repository.VendaRepository;
 import br.com.pdv.marketcontrol.service.VendaService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,5 +59,13 @@ public class VendaController {
                 .map(vendaResponse -> ResponseEntity.accepted().body(
                         new VendaDTO(this.service.salvar(venda))))
                 .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @DeleteMapping("/{id}")
+    @ApiOperation("Deleta uma venda pelo id")
+    public ResponseEntity deletarVenda(@PathVariable Long id){
+        return service.buscarVenda(id)
+                .map( produto -> service.deletar(id))
+                .orElse(ResponseEntity.notFound().build());
     }
 }

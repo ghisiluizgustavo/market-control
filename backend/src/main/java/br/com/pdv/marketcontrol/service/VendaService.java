@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -35,5 +36,10 @@ public class VendaService {
 
     public Venda salvar(Venda venda) {
         return vendaRepository.save(venda);
+    }
+
+    public ResponseEntity deletar(Long id) {
+        vendaRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
