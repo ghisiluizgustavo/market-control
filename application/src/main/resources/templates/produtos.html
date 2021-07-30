@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/components/base :: head}"></head>
+<body>
+  <header>
+    <nav th:replace="~{/components/navbar :: navbar}"></nav>
+  </header>
+  <h3 class="text-center">Produtos</h3>
+  <hr>
+  <div th:each="produto : ${produtos}" >
+    <div>
+      <b>Nome: </b>
+      <span th:text="${produto.getNome()}"></span>
+    </div>
+
+    <div>
+      <b>Valor: </b>
+      <span th:text="${produto.getValor()}"></span>
+    </div>
+
+    <div>
+      <b>Codigo de Barras: </b>
+      <span th:text="${produto.getCodBarras()}"></span>
+    </div>
+    <hr>
+  </div>
+
+  <script th:replace="~{/components/base :: script}"></script>
+</body>
+</html>

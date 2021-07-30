@@ -3,7 +3,6 @@ package br.com.pdv.marketcontrol.controller;
 import br.com.pdv.marketcontrol.model.Produto;
 import br.com.pdv.marketcontrol.model.dto.ProdutoDTO;
 import br.com.pdv.marketcontrol.service.ProdutoService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,26 +10,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 
-@RestController
+@Controller
 @RequestMapping("/produtos")
-@Api("API Rest de produtos [CRUD]")
-@CrossOrigin(origins = "*")
 public class ProdutoController {
 
     @Autowired
     ProdutoService produtoService;
 
     @GetMapping()
-    @ApiOperation("Retorna todos produtos")
-    public ResponseEntity<Page<ProdutoDTO>> listarProdutos(
+    public ModelAndView listarProdutos(
             @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
-        Page<ProdutoDTO> listaProd = produtoService.buscarTodosProdutos(pageable);
-        return ResponseEntity.ok(listaProd);
+        Page<ProdutoDTO> produtos = produtoService.buscarTodosProdutos(pageable);
+        ModelAndView mv = new ModelAndView("produtos");
+        mv.addObject("produtos", produtos);
+        return mv;
     }
 
     @GetMapping("/{codBarras}")
