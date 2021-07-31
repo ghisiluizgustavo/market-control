@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/components/base :: head}"></head>
 <body>
   <header>
     <nav th:replace="~{/components/navbar :: navbar}"></nav>
   </header>
-  <h3 class="text-center">Produtos</h3>
+
+  <h3 class="text-center m-3">Produtos</h3>
+
   <hr>
-  <div th:each="produto : ${produtos}" >
-    <div>
-      <b>Nome: </b>
-      <span th:text="${produto.getNome()}"></span>
-    </div>
 
-    <div>
-      <b>Valor: </b>
-      <span th:text="${produto.getValor()}"></span>
+  <div class="card-group">
+    <div class="card m-3" th:each="produto : ${produtos}">
+      <div class="card-header text-white bg-dark">
+        <h5 class="card-title" th:text="${produto.nome}"></h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text" >
+          <b> Codigo de barras: </b>
+          <span th:text="${produto.codBarras}"></span>
+        </p>
+        <p class="card-text" >
+          <b> Valor: </b>
+          <span th:text="${produto.valor}"></span>
+        </p>
+        <p class="card-text" >
+          <b> Quantidade: </b>
+          <span th:text="${produto.quantidade}"></span>
+        </p>
+        <p class="card-text"><small class="text-muted" th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}"></small></p>
+      </div>
     </div>
-
-    <div>
-      <b>Codigo de Barras: </b>
-      <span th:text="${produto.getCodBarras()}"></span>
-    </div>
-    <hr>
   </div>
-
   <script th:replace="~{/components/base :: script}"></script>
 </body>
 </html>
