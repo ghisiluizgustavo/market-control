@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/components/base :: head}"></head>
-<body>
+<body class="bg-light">
   <header>
     <nav th:replace="~{/components/navbar :: navbar}"></nav>
   </header>
 
-  <h3 class="text-center m-3">Produtos</h3>
-
-  <hr>
+  <!--TODO - pegar produto pelo codigo de barras-->
+  <form method="get" th:action="@{/produtos/}" th:object="${String}">
+    <div class="m-3 d-flex">
+      <input placeholder="Pesquisar pelo código de barras..." type="text" class="m-3 form-control" id="barcode">
+      <button type="submit" class="btn btn-dark m-3">Pesquisar</button>
+    </div>
+  </form>
 
   <div class="card-group">
     <div class="card m-3" th:each="produto : ${produtos}">
