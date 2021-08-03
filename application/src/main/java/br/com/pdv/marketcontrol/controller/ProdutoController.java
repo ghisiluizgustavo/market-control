@@ -40,6 +40,11 @@ public class ProdutoController {
                   .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/novo")
+    public String novo(){
+        return "novoProduto";
+    }
+
     @PostMapping()
     public ResponseEntity<ProdutoDTO> salvarProduto(
             @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
