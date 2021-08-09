@@ -3,49 +3,49 @@
 <head th:replace="~{/components/base :: head}"></head>
 <body>
 <header>
-  <nav th:replace="~{/components/navbar :: navbar}"></nav>
+    <nav th:replace="~{/components/navbar :: navbar}"></nav>
 </header>
 
 <!--TODO - pegar produto pelo codigo de barras-->
 <div class="m-3 d-flex ">
-  <form class="d-flex w-100" method="get"
-        th:action="@{/produtos/pesquisar}">
-    <input placeholder="Pesquisar pelo código de barras..." type="text"
-           class="m-3 form-control" id="codBarras" th:name="codBarras">
-    <button type="submit" class="btn btn-dark m-3">Pesquisar</button>
-  </form>
-  <a class="text-decoration-none" href="produtos/novo">
-    <button
-            class="btn btn-dark m-3">Adicionar
-    </button>
-  </a>
+    <form class="d-flex w-100" method="get"
+          th:action="@{/produtos/pesquisar}">
+        <input placeholder="Pesquisar pelo código de barras..." type="text"
+               class="m-3 form-control" id="codBarras" th:name="codBarras">
+        <button type="submit" class="btn btn-dark m-3">Pesquisar</button>
+    </form>
+    <a class="text-decoration-none" href="produtos/novo">
+        <button
+                class="btn btn-dark m-3">Adicionar
+        </button>
+    </a>
 </div>
 
 
 <div class="row p-3">
-  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-       th:each="produto : ${produtos}">
-    <div class="card">
-      <div class="card-header text-white bg-dark">
-        <h5 class="card-title" th:text="${produto.nome}"></h5>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          <b> Codigo de barras: </b> <span th:text="${produto.codBarras}"></span>
-        </p>
-        <p class="card-text">
-          <b> Valor: </b> <span th:text="${produto.valor}"></span>
-        </p>
-        <p class="card-text">
-          <b> Quantidade: </b> <span th:text="${produto.quantidade}"></span>
-        </p>
-        <p class="card-text">
-          <small class="text-muted"
-                 th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}"></small>
-        </p>
-      </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+         th:each="produto : ${produtos}">
+        <div class="card">
+            <div class="card-header text-white bg-dark">
+                <h5 class="card-title" th:text="${produto.nome}"></h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <b> Codigo de barras: </b> <span th:text="${produto.codBarras}"></span>
+                </p>
+                <p class="card-text">
+                    <b> Valor: </b> <span th:text="${produto.valor}"></span>
+                </p>
+                <p class="card-text">
+                    <b> Quantidade: </b> <span th:text="${produto.quantidade}"></span>
+                </p>
+                <p class="card-text">
+                    <small class="text-muted"
+                           th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}"></small>
+                </p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <script th:replace="~{/components/base :: script}"></script>
 </body>
