@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/produtos")
@@ -33,11 +34,14 @@ public class ProdutoController {
         return mv;
     }
 
-    @GetMapping("/{codBarras}")
-    public ResponseEntity<ProdutoDTO> buscarProduto(@PathVariable String codBarras){
-          return produtoService.buscarProduto(codBarras)
-                  .map(produto -> ResponseEntity.ok().body(ProdutoDTO.converter(produto)))
-                  .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/pesquisar")
+    @ResponseBody
+    public String buscarProduto(@RequestParam String codBarras){
+    	Optional<Produto> prod = this.produtoService.buscarProduto(codBarras);
+    	if (prod.isPresent()) {
+    		return "Produto => " + prod.toString();
+    	}
+    	return "Produto não encontrado";
     }
 
     @GetMapping("/novo")
