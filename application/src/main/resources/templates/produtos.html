@@ -8,11 +8,12 @@
 
   <!--TODO - pegar produto pelo codigo de barras-->
   <div class="m-3 d-flex ">
-    <form class="d-flex w-100" method="get" th:action="@{/produtos/}" th:object="${String}">
+    <form class="d-flex w-100" method="get" th:action="@{/produtos/pesquisar}">
       <input placeholder="Pesquisar pelo código de barras..."
              type="text"
              class="m-3 form-control"
-             id="codBarras">
+             id="codBarras"
+             th:name="codBarras">
       <button type="submit" class="btn btn-dark m-3">Pesquisar</button>
     </form>
     <a class="text-decoration-none" href="produtos/novo"><button class="btn btn-dark m-3">Adicionar</button></a>
