@@ -27,31 +27,31 @@ public class ProdutoController {
 
     @GetMapping()
     public ModelAndView listarProdutos(
-            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
+            @PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<ProdutoDTO> produtos = produtoService.buscarTodosProdutos(pageable);
-        ModelAndView mv = new ModelAndView("produtos");
+        ModelAndView mv = new ModelAndView("produtos/produtos");
         mv.addObject("produtos", produtos);
         return mv;
     }
 
     @GetMapping("/pesquisar")
     @ResponseBody
-    public String buscarProduto(@RequestParam String codBarras){
-    	Optional<Produto> prod = this.produtoService.buscarProduto(codBarras);
-    	if (prod.isPresent()) {
-    		return "Produto => " + prod.toString();
-    	}
-    	return "Produto não encontrado";
+    public String buscarProduto(@RequestParam String codBarras) {
+        Optional<Produto> prod = this.produtoService.buscarProduto(codBarras);
+        if (prod.isPresent()) {
+            return "Produto => " + prod.toString();
+        }
+        return "Produto não encontrado";
     }
 
     @GetMapping("/novo")
-    public String novo(){
-        return "novoProduto";
+    public String novo() {
+        return "produtos/novo-produto";
     }
 
     @PostMapping()
     public ResponseEntity<ProdutoDTO> salvarProduto(
-            @RequestBody Produto produto, UriComponentsBuilder uriBuilder){
+            @RequestBody Produto produto, UriComponentsBuilder uriBuilder) {
         Produto prodResponse = this.produtoService.salvar(produto);
         URI uri = uriBuilder
                 .path("/produtos/{id}")
@@ -62,7 +62,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoDTO> atualizarProduto(
-            @PathVariable Long id, @RequestBody Produto produto){
+            @PathVariable Long id, @RequestBody Produto produto) {
         return produtoService.buscarId(id)
                 .map(prodResponse -> ResponseEntity.accepted().body(
                         new ProdutoDTO(this.produtoService.salvar(produto))))
@@ -70,9 +70,9 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarProduto(@PathVariable Long id){
-         return produtoService.buscarId(id)
-                 .map( produto -> produtoService.deletar(id))
-                 .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity deletarProduto(@PathVariable Long id) {
+        return produtoService.buscarId(id)
+                .map(produto -> produtoService.deletar(id))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
