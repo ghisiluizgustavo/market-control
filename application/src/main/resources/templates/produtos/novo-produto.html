@@ -12,7 +12,7 @@
 
         <h3 class="display-6 mb-3 border-bottom">Novo produto</h3>
 
-        <div class="mb-3 d-flex flex-column">
+        <div class="d-flex flex-column">
             <label for="nome">Nome do produto</label>
             <input class="form-control mt-1"
                    type="text"
@@ -21,9 +21,9 @@
                    th:field="*{nome}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3" th:errors="*{nome}"></div>
+        <div class="invalid-feedback d-block" th:errors="*{nome}"></div>
 
-        <div class="mb-3 d-flex flex-column">
+        <div class="mt-3 d-flex flex-column">
             <label for="codBarras">Código de barras</label>
             <input class="form-control mt-1"
                    type="text"
@@ -32,9 +32,9 @@
                    th:field="*{codBarras}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3" th:errors="*{codBarras}"></div>
+        <div class="invalid-feedback d-block" th:errors="*{codBarras}"></div>
 
-        <div class="mb-4 d-flex flex-column">
+        <div class="mt-3 d-flex flex-column">
             <label for="valor">Valor do produto</label>
             <input class="form-control mt-1"
                    type="text"
@@ -43,10 +43,10 @@
                    th:field="*{valor}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3" th:errors="*{valor}"></div>
+        <div class="invalid-feedback d-block" th:errors="*{valor}"></div>
 
         <div class="mb-3 d-flex justify-content-between">
-            <div class="mb-3">
+            <div class="mt-3 d-flex flex-column">
                 <label for="quantidade">Quantidade</label>
                 <input class="form-control mt-1"
                        type="text"
@@ -54,10 +54,10 @@
                        name="quantidade"
                        th:field="*{quantidade}"
                        th:errorclass="is-invalid">
+                <div class="invalid-feedback d-block" th:errors="*{quantidade}"></div>
             </div>
-            <div class="invalid-feedback d-block mb-3" th:errors="*{quantidade}"></div>
 
-            <div class="mb-3">
+            <div class="mt-3 d-flex flex-column">
                 <label for="vencimento">Data de vencimento</label>
                 <input class="form-control mt-1"
                        type="date"
@@ -65,8 +65,8 @@
                        name="vencimento"
                        th:field="*{vencimento}"
                        th:errorclass="is-invalid">
+                <div class="invalid-feedback d-block" th:errors="*{vencimento}"></div>
             </div>
-            <div class="invalid-feedback d-block mb-3" th:errors="*{vencimento}"></div>
         </div>
 
         <div class="mb-3">
