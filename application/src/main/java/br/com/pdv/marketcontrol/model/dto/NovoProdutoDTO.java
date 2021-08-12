@@ -4,21 +4,21 @@ import br.com.pdv.marketcontrol.model.Produto;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class NovoProdutoDTO {
 
-    @NotBlank
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
-    @NotBlank
+    @NotNull(message = "O valor é obrigatório")
     private Float valor;
-    @NotBlank
+    @NotNull(message = "")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotBlank
     private LocalDate vencimento;
-    @NotBlank
+    @NotBlank(message = "O codigo de barras é obrigatório")
     private String codBarras;
-    @NotBlank
+    @NotNull(message = "")
     private Integer quantidade;
 
     public Produto convertToProduto(NovoProdutoDTO produto){

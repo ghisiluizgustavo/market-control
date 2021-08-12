@@ -4,21 +4,17 @@ import br.com.pdv.marketcontrol.model.Produto;
 import br.com.pdv.marketcontrol.model.dto.NovoProdutoDTO;
 import br.com.pdv.marketcontrol.model.dto.ProdutoDTO;
 import br.com.pdv.marketcontrol.service.ProdutoService;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.Optional;
 
 @Controller
@@ -55,7 +51,7 @@ public class ProdutoController {
     @PostMapping()
     public String salvarProduto(@Valid NovoProdutoDTO novoProdutoDTO, BindingResult result) {
         if(result.hasErrors()){
-            return "/produtos/novo-produto";
+            return "produtos/novo-produto";
         }
         Produto prod = novoProdutoDTO.convertToProduto(novoProdutoDTO);
         Produto prodResponse = this.produtoService.salvar(prod);

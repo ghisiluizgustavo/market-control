@@ -21,7 +21,7 @@
                    th:field="*{nome}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3"  th:errors="*{nome}"></div>
+        <div class="invalid-feedback d-block mb-3" th:errors="*{nome}"></div>
 
         <div class="mb-3 d-flex flex-column">
             <label for="codBarras">Código de barras</label>
@@ -32,7 +32,7 @@
                    th:field="*{codBarras}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3"  th:errors="*{codBarras}"></div>
+        <div class="invalid-feedback d-block mb-3" th:errors="*{codBarras}"></div>
 
         <div class="mb-4 d-flex flex-column">
             <label for="valor">Valor do produto</label>
@@ -43,7 +43,7 @@
                    th:field="*{valor}"
                    th:errorclass="is-invalid">
         </div>
-        <div class="invalid-feedback d-block mb-3"  th:errors="*{valor}"></div>
+        <div class="invalid-feedback d-block mb-3" th:errors="*{valor}"></div>
 
         <div class="mb-3 d-flex justify-content-between">
             <div class="mb-3">
@@ -63,10 +63,10 @@
                        type="date"
                        id="vencimento"
                        name="vencimento"
-                       th:field="*{{vencimento}}"
+                       th:field="*{vencimento}"
                        th:errorclass="is-invalid">
             </div>
-            <div class="invalid-feedback d-block mb-3"  th:errors="*{vencimento}"></div>
+            <div class="invalid-feedback d-block mb-3" th:errors="*{vencimento}"></div>
         </div>
 
         <div class="mb-3">
