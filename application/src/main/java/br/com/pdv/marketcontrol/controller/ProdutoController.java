@@ -1,6 +1,7 @@
 package br.com.pdv.marketcontrol.controller;
 
 import br.com.pdv.marketcontrol.model.Produto;
+import br.com.pdv.marketcontrol.model.dto.NovoProdutoDTO;
 import br.com.pdv.marketcontrol.model.dto.ProdutoDTO;
 import br.com.pdv.marketcontrol.service.ProdutoService;
 import io.swagger.annotations.ApiOperation;
@@ -11,10 +12,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
@@ -45,34 +48,33 @@ public class ProdutoController {
     }
 
     @GetMapping("/novo")
-    public String novo() {
+    public String novo(NovoProdutoDTO novoProdutoDTO) {
         return "produtos/novo-produto";
     }
 
     @PostMapping()
-    public ResponseEntity<ProdutoDTO> salvarProduto(
-            @RequestBody Produto produto, UriComponentsBuilder uriBuilder) {
-        Produto prodResponse = this.produtoService.salvar(produto);
-        URI uri = uriBuilder
-                .path("/produtos/{id}")
-                .buildAndExpand(prodResponse.getId())
-                .toUri();
-        return ResponseEntity.created(uri).body(new ProdutoDTO(prodResponse));
+    public String salvarProduto(@Valid NovoProdutoDTO novoProdutoDTO, BindingResult result) {
+        if(result.hasErrors()){
+            return "/produtos/novo-produto";
+        }
+        Produto prod = novoProdutoDTO.convertToProduto(novoProdutoDTO);
+        Produto prodResponse = this.produtoService.salvar(prod);
+        return "redirect:/produtos";
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ProdutoDTO> atualizarProduto(
-            @PathVariable Long id, @RequestBody Produto produto) {
-        return produtoService.buscarId(id)
-                .map(prodResponse -> ResponseEntity.accepted().body(
-                        new ProdutoDTO(this.produtoService.salvar(produto))))
-                .orElse(ResponseEntity.badRequest().build());
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deletarProduto(@PathVariable Long id) {
-        return produtoService.buscarId(id)
-                .map(produto -> produtoService.deletar(id))
-                .orElse(ResponseEntity.notFound().build());
-    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ProdutoDTO> atualizarProduto(
+//            @PathVariable Long id, @RequestBody Produto produto) {
+//        return produtoService.buscarId(id)
+//                .map(prodResponse -> ResponseEntity.accepted().body(
+//                        new ProdutoDTO(this.produtoService.salvar(produto))))
+//                .orElse(ResponseEntity.badRequest().build());
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity deletarProduto(@PathVariable Long id) {
+//        return produtoService.buscarId(id)
+//                .map(produto -> produtoService.deletar(id))
+//                .orElse(ResponseEntity.notFound().build());
+//    }
 }
