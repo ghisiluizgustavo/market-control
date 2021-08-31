@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/components/base :: head}"></head>
+<body>
+<header>
+    <nav th:replace="~{/components/navbar :: navbar}"></nav>
+</header>
+    <div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+            <h5 class="card-title" th:text="${produto.get().getNome()}"></h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                <b> Codigo de barras: </b> <span th:text="${produto.get().getCodBarras()}"></span>
+            </p>
+            <p class="card-text">
+                <b> Valor: </b> <span th:text="${produto.get().getValor()}"></span>
+            </p>
+            <p class="card-text">
+                <b> Quantidade: </b> <span th:text="${produto.get().getQuantidade()}"></span>
+            </p>
+            <p class="card-text">
+                <small class="text-muted"
+                       th:text="${#temporals.format(produto.get().getVencimento(), 'dd/MM/yyyy')}"></small>
+            </p>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

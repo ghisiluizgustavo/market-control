@@ -35,12 +35,12 @@ public class ProdutoController {
 
     @GetMapping("/pesquisar")
     @ResponseBody
-    public String buscarProduto(@RequestParam String codBarras) {
+    public ModelAndView buscarProduto(@RequestParam String codBarras) {
         Optional<Produto> prod = this.produtoService.buscarProduto(codBarras);
         if (prod.isPresent()) {
-            return "Produto => " + prod.toString();
+            return new ModelAndView("produtos/produto-selecionado").addObject("produto", prod);
         }
-        return "Produto não encontrado";
+        return new ModelAndView("index");
     }
 
     @GetMapping("/novo")
@@ -54,7 +54,7 @@ public class ProdutoController {
             return "produtos/novo-produto";
         }
         Produto prod = novoProdutoDTO.convertToProduto(novoProdutoDTO);
-        Produto prodResponse = this.produtoService.salvar(prod);
+        this.produtoService.salvar(prod);
         return "redirect:/produtos";
     }
 

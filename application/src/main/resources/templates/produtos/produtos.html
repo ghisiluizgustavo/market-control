@@ -6,7 +6,6 @@
     <nav th:replace="~{/components/navbar :: navbar}"></nav>
 </header>
 
-<!--TODO - pegar produto pelo codigo de barras-->
 <div class="m-3 d-flex ">
     <form class="d-flex w-100" method="get"
           th:action="@{/produtos/pesquisar}">
@@ -21,7 +20,7 @@
     </a>
 </div>
 
-
+<!--TODO - EDITAR E EXCLUIR PRODUTO-->
 <div class="row p-3">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
          th:each="produto : ${produtos}">
