@@ -34,7 +34,6 @@ public class ProdutoController {
     }
 
     @GetMapping("/pesquisar")
-    @ResponseBody
     public ModelAndView buscarProduto(@RequestParam String codBarras) {
         Optional<Produto> prod = this.produtoService.buscarProduto(codBarras);
         if (prod.isPresent()) {
@@ -68,9 +67,13 @@ public class ProdutoController {
 //    }
 //
 //    @DeleteMapping("/{id}")
-//    public ResponseEntity deletarProduto(@PathVariable Long id) {
-//        return produtoService.buscarId(id)
-//                .map(produto -> produtoService.deletar(id))
-//                .orElse(ResponseEntity.notFound().build());
-//    }
+    @PostMapping("/{id}")
+    public String deletarProduto(@PathVariable Long id) {
+        Optional<Produto> produto = this.produtoService.buscarId(id);
+        if(produto.isPresent()){
+            this.produtoService.deletar(id);
+            return "redirect:/index";
+        }
+        return "redirect:/produtos";
+    }
 }

@@ -22,6 +22,7 @@
 
 <!--TODO - EDITAR E EXCLUIR PRODUTO-->
 <div class="row p-3">
+    <!--/*@thymesVar id="produto" type="br.com.pdv.marketcontrol.model.Produto"*/-->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
          th:each="produto : ${produtos}">
         <div class="card">
@@ -40,8 +41,15 @@
                 </p>
                 <p class="card-text">
                     <small class="text-muted"
-                           th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}"></small>
+                           th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}">
+                    </small>
+
                 </p>
+                <form method="post" th:action="@{/produtos/{id}(id=${produto.id})}">
+                    <button type="submit" class="btn btn-link text-danger">
+                        <i class="gg-trash"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
