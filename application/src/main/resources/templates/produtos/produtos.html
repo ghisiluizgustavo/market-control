@@ -43,13 +43,22 @@
                     <small class="text-muted"
                            th:text="${#temporals.format(produto.vencimento, 'dd/MM/yyyy')}">
                     </small>
-
                 </p>
-                <form method="post" th:action="@{/produtos/{id}(id=${produto.id})}">
-                    <button type="submit" class="btn btn-link text-danger">
-                        <i class="gg-trash"></i>
-                    </button>
-                </form>
+
+                <div class="d-flex justify-content-end">
+                    <form method="post" th:action="@{/produtos/deletar/{id}(id=${produto.id})}">
+                        <button type="submit" class="btn btn-link text-danger">
+                            <i class="gg-trash"></i>
+                        </button>
+                    </form>
+
+                    <form method="post" th:action="@{/produtos/editar/{id}(id=${produto.id})}">
+                        <button type="submit" class="btn btn-link text-dark">
+                            <i class="gg-pen"></i>
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>

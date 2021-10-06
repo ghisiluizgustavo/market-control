@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{components/base :: head}"></head>
+<body>
+<header>
+    <nav th:replace="~{/components/navbar :: navbar}"></nav>
+</header>
+
+<main class="d-flex justify-content-center mt-3">
+    <!--/*@thymesVar id="novoProdutoDTO" type="br.com.pdv.marketcontrol.model.dto.NovoProdutoDTO"*/-->
+    <form class="border border-dark rounded-3 p-3 w-50" th:object="${novoProdutoDTO}" action="/produtos" method="post">
+
+        <h3 class="display-6 mb-3 border-bottom">Editar produto</h3>
+
+        <div class="d-flex flex-column">
+            <label for="nome">Nome do produto</label>
+            <input class="form-control mt-1"
+                   type="text"
+                   id="nome"
+                   name="nome"
+                   th:field="*{nome}"
+                   th:errorclass="is-invalid">
+        </div>
+        <div class="invalid-feedback d-block" th:errors="*{nome}"></div>
+
+        <div class="mt-3 d-flex flex-column">
+            <label for="codBarras">Código de barras</label>
+            <input class="form-control mt-1"
+                   type="text"
+                   id="codBarras"
+                   name="codBarras"
+                   th:field="*{codBarras}"
+                   th:errorclass="is-invalid">
+        </div>
+        <div class="invalid-feedback d-block" th:errors="*{codBarras}"></div>
+
+        <div class="mt-3 d-flex flex-column">
+            <label for="valor">Valor do produto</label>
+            <input class="form-control mt-1"
+                   type="text"
+                   id="valor"
+                   name="valor"
+                   th:field="*{valor}"
+                   th:errorclass="is-invalid">
+        </div>
+        <div class="invalid-feedback d-block" th:errors="*{valor}"></div>
+
+        <div class="mb-3 d-flex justify-content-between">
+            <div class="mt-3 d-flex flex-column">
+                <label for="quantidade">Quantidade</label>
+                <input class="form-control mt-1"
+                       type="text"
+                       id="quantidade"
+                       name="quantidade"
+                       th:field="*{quantidade}"
+                       th:errorclass="is-invalid">
+                <div class="invalid-feedback d-block" th:errors="*{quantidade}"></div>
+            </div>
+
+            <div class="mt-3 d-flex flex-column">
+                <label for="vencimento">Data de vencimento</label>
+                <input class="form-control mt-1"
+                       type="date"
+                       id="vencimento"
+                       name="vencimento"
+                       th:field="*{vencimento}"
+                       th:errorclass="is-invalid">
+                <div class="invalid-feedback d-block" th:errors="*{vencimento}"></div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-dark btn-lg btn-block w-100" type="submit">Adicionar</button>
+        </div>
+
+    </form>
+</main>
+
+</body>
+</html>

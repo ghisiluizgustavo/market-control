@@ -57,17 +57,21 @@ public class ProdutoController {
         return "redirect:/produtos";
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ProdutoDTO> atualizarProduto(
-//            @PathVariable Long id, @RequestBody Produto produto) {
+    @GetMapping("/editar/formulario")
+    public String formularioParaEditar(){
+        return "produtos/editar-produto";
+    }
+
+//    @PostMapping("/editar/{id}")
+//    public String atualizarProduto(@PathVariable Long id, @RequestBody Produto produto) {
 //        return produtoService.buscarId(id)
 //                .map(prodResponse -> ResponseEntity.accepted().body(
 //                        new ProdutoDTO(this.produtoService.salvar(produto))))
 //                .orElse(ResponseEntity.badRequest().build());
 //    }
-//
-//    @DeleteMapping("/{id}")
-    @PostMapping("/{id}")
+
+
+    @PostMapping("/deletar/{id}")
     public String deletarProduto(@PathVariable Long id) {
         Optional<Produto> produto = this.produtoService.buscarId(id);
         if(produto.isPresent()){
